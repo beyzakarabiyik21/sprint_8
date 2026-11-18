@@ -45,9 +45,33 @@ src/
 
 ## Çalıştırma
 
+Proje iki bölümden oluşur. İkisini aynı anda çalıştırmak için iki ayrı terminal açın.
+
+### Backend (Node + Express + MongoDB)
+
 ```bash
+cd backend
 npm install
-npm run dev
+cp .env.example .env
 ```
 
-`vercel.json`, sayfa yenilendiğinde route'ların Vercel'de 404 vermemesi için tüm istekleri `index.html`'e yönlendirir.
+`.env` dosyasındaki `MONGODB_URI` değerini kendi MongoDB Atlas bağlantı adresinizle değiştirin (`<db_password>` yerine şifrenizi yazın, `.net/` sonrasına `kampus` ekleyin). Bu dosya GitHub'a gönderilmez.
+
+```bash
+npm run seed   # 6 örnek etkinliği veritabanına yazar
+npm run dev    # http://localhost:3000
+```
+
+Terminalde `MongoDB bağlandı (Atlas): ...` ve `API: http://localhost:3000` yazılarını görmelisiniz. Kontrol için tarayıcıda `http://localhost:3000/health` adresini açın. Endpoint'ler ve Postman koleksiyonu için [backend/README.md](backend/README.md) dosyasına bakın.
+
+### Frontend (React + TypeScript + Vite)
+
+```bash
+cd frontend
+npm install
+npm run dev    # http://localhost:5173
+```
+
+Terminalde yazan adresi (`http://localhost:5173`) tarayıcıda açın.
+
+`frontend/vercel.json`, sayfa yenilendiğinde route'ların Vercel'de 404 vermemesi için tüm istekleri `index.html`'e yönlendirir.
